@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="10dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:orientation="vertical"
+                android:background="@color/top_bg"
+                android:padding="5dp"
+                tools:ignore="MissingConstraints">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Cyber Cop"
+                    android:textSize="25sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="sans-serif-black"
+                    android:layout_marginLeft="20sp"
+
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Practice Cyber Safety"
+                    android:textColor="@color/six_end"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="20dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:onClick="location_page"
+                android:id="@+id/location"
+                android:layout_width="350dp"
+                android:layout_height="100dp"
+                android:orientation="horizontal"
+                android:background="@drawable/one_bg"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="5dp"
+                android:padding="3dp"
+                android:layout_gravity="center">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Know Your Location"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10dp"
+                        android:textSize="16dp"
+                        android:textColor="@color/colorWhite"
+                        android:layout_marginLeft="15dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Area"
+                        android:id="@+id/area"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10sp"
+                        android:textColor="@color/colorWhite"
+                        android:layout_marginLeft="15dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="City"
+                        android:id="@+id/city"
+                        android:textStyle="bold"
+                        android:textSize="15sp"
+                        android:textColor="@color/colorWhite"
+                        android:layout_marginLeft="15dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/crime"
+                        android:textSize="15sp"
+                        android:textColor="@color/colorWhite"
+                        android:layout_marginLeft="15dp"></TextView>
+                </LinearLayout>
+                <ImageView
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:padding="8dp"
+                    android:src="@drawable/location4"
+                    android:layout_marginLeft="60dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+
+                android:layout_width="350dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/two_bg"
+                android:onClick="OpenCamera"
+                android:orientation="horizontal"
+                android:padding="3dp">
+                android:onClick="OpenCamera"
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Protect your camera"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="16dp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_marginLeft="60dp"
+
+                    android:padding="8dp"
+                    android:src="@drawable/camera3" />
+            </LinearLayout>
+            <LinearLayout
+                android:onClick="safe_search_page"
+                android:layout_width="350dp"
+                android:layout_height="100dp"
+                android:orientation="horizontal"
+                android:background="@drawable/three_bg"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="5dp"
+                android:padding="3dp"
+                android:layout_gravity="center">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Safe Search"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10dp"
+                        android:textSize="16dp"
+                        android:textColor="@color/colorWhite"
+                        android:layout_marginLeft="15dp"/>
+
+                </LinearLayout>
+                <ImageView
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:padding="8dp"
+
+                    android:src="@drawable/search3"
+                    android:layout_marginLeft="120dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:onClick="sms_page"
+                android:layout_width="350dp"
+                android:layout_height="100dp"
+                android:orientation="horizontal"
+                android:background="@drawable/four"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="20dp"
+                android:padding="3dp"
+                android:layout_gravity="center">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="View sms Safely"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10dp"
+                        android:textSize="16dp"
+                        android:textColor="@color/colorWhite"
+                        android:layout_marginLeft="15dp"/>
+
+                </LinearLayout>
+                <ImageView
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:padding="8dp"
+
+                    android:src="@drawable/sms"
+                    android:layout_marginLeft="90dp"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

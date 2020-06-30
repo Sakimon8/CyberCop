@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!--    <color name="colorPrimary">#2D2C2C</color>-->
+<!--    <color name="colorPrimaryDark">#2D2C2C</color>-->
+<!--    <color name="colorAccent">#dbe4eb</color>-->
+    <color name="colorWhite">#FFFEFE</color>
+    <color name="black">#2D2C2C</color>
+    <color name="top_bg">#EEEBEB</color>
+    <color name="one_stat">#F56BD2</color>
+    <color name="one_end">#A20BBD</color>
+    <color name="two_stat">#F0A12C</color>
+    <color name="two_end">#F06406</color>
+    <color name="three_stat">#E98F0B</color>
+    <color name="three_end">#F8CA40</color>
+    <color name="four_stat">#EBF39B73</color>
+    <color name="four_end">#F38524</color>
+    <color name="five_stat">#C11CDD</color>
+    <color name="five_end">#526AEE</color>
+    <color name="six_stat">#3EC2FA</color>
+    <color name="six_end">#526AEE</color>
+<!--    <resources>-->
+        <color name="colorPrimary">#3F51B5</color>
+        <color name="colorPrimaryDark">#303F9F</color>
+        <color name="colorAccent">#FF4081</color>
+<!--    </resources>-->
+
+
+
+</resources>
