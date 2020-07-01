@@ -44,6 +44,7 @@ public class gpstracker implements LocationListener {
                 } else {
                     ActivityCompat.requestPermissions((Activity)context,
                             new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS);
+                    //hello this is deepika
 
                 }
             }
