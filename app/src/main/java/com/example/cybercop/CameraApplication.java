@@ -21,11 +21,11 @@ public class CameraApplication extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        //Hello Tanisa
         super.onCreate(savedInstanceState);
         devicePolicyManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
         adminComponent = new ComponentName(getPackageName(),getPackageName() + ".DeviceAdministrator");
-
+        //hello
         // Request device admin activation if not enabled.
         if (!devicePolicyManager.isAdminActive(adminComponent)) {
 
