@@ -238,7 +238,7 @@ public class Location_crime_rate extends AppCompatActivity {
     public class JSONDownloader {
 
         //SAVE/RETRIEVE URLS
-        private static final String JSON_DATA_URL="http://192.168.42.16/dataset.json";
+        private static final String JSON_DATA_URL="http://192.168.1.36/dataset2.json";
         //INSTANCE FIELDS
         private final Context c;
 

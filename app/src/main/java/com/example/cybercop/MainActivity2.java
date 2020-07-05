@@ -56,7 +56,7 @@ public class MainActivity2 extends AppCompatActivity {
 
     }
     private void jsonParse() {
-        String url = "http://192.168.1.42/dataset.json";
+        String url = "http://192.168.1.36/dataset.json";
        // Toast.makeText(getApplicationContext(), "inside call", Toast.LENGTH_SHORT).show();
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {

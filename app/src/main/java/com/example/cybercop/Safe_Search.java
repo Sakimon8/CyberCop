@@ -27,23 +27,30 @@ public class Safe_Search extends AppCompatActivity  {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
+                Toast.makeText(getApplicationContext(),url,Toast.LENGTH_SHORT).show();
 
                 Log.d("WebView", "your current url when webpage loading.." + url);
             }
 
             @Override
             public void onPageFinished(WebView view, String url) {
+               // Toast.makeText(getApplicationContext(),url,Toast.LENGTH_SHORT).show();
+
                 Log.d("WebView", "your current url when webpage loading.. finish" + url);
                 super.onPageFinished(view, url);
             }
 
             @Override
             public void onLoadResource(WebView view, String url) {
+               // Toast.makeText(getApplicationContext(),url,Toast.LENGTH_SHORT).show();
+
                 // TODO Auto-generated method stub
                 super.onLoadResource(view, url);
             }
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
+               // Toast.makeText(getApplicationContext(),url,Toast.LENGTH_SHORT).show();
+
                 System.out.println("when you click on any interlink on webview that time you got url :-" + url);
                 return super.shouldOverrideUrlLoading(view, url);
             }

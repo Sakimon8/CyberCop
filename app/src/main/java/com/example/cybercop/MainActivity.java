@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity  {
                 String []loc=gpstracker.data();
                 Intent i=new Intent(MainActivity.this,MainActivity2.class);
 
-                Toast.makeText(MainActivity.this,"Area is "+loc[0],Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this,"Area is "+loc[1],Toast.LENGTH_LONG).show();
 
                 i.putExtra("loc",loc[0]);
                 i.putExtra("sub_loc",loc[1]);

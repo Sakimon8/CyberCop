@@ -45,7 +45,7 @@
                 android:onClick="location_page"
                 android:id="@+id/location"
                 android:layout_width="350dp"
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:background="@drawable/one_bg"
                 android:layout_marginTop="25dp"
