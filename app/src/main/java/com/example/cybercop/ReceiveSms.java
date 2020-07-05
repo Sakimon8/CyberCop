@@ -23,7 +23,7 @@ public class ReceiveSms extends BroadcastReceiver {
                         msgs[i]=SmsMessage.createFromPdu((byte[])pdus[i]);
                         msg_from=msgs[i].getOriginatingAddress();
                         String msgBody=msgs[i].getMessageBody();
-                        new CheckMessage(context,0).execute(msgBody,msg_from);
+
                         Toast.makeText(context,"From"+msg_from+"\nBody:"+msgBody,Toast.LENGTH_LONG).show();
                     }
                 }

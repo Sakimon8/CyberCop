@@ -49,6 +49,7 @@ public class gpstracker implements LocationListener {
                 }
             }
         }
+     
         LocationManager lm =(LocationManager) context.getSystemService(LOCATION_SERVICE);
         boolean isGpsEnabled=lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
         Location location=null;
