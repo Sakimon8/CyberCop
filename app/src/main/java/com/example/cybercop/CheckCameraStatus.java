@@ -12,6 +12,8 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
 import android.util.Log;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -32,7 +34,10 @@ public class CheckCameraStatus extends AsyncTask {
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected Object doInBackground(Object[] objects) {
-        Log.i("Execution Progress","Method Before Execution");
+//        Log.i("Execution Progress","Method Before Execution");
+
+        if(isCancelled())
+            return null;
 
         CameraManager manager = null;
         manager = (CameraManager) context.getSystemService(Context.CAMERA_SERVICE);
@@ -40,22 +45,28 @@ public class CheckCameraStatus extends AsyncTask {
 
             @Override
             public void onCameraAvailable(@NonNull String cameraId) {
-                super.onCameraAvailable(cameraId);
+                if(isCancelled())
+                    return;
+
                 //Camera isn't used
-                Log.i("Execution Progress","Method Inside");
+                super.onCameraAvailable(cameraId);
+
+//                Log.i("Execution Progress","Method Inside");
 //                Toast.makeText(context,"Camera Not in Use",Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onCameraUnavailable(@NonNull String cameraId) {
+                if(isCancelled())
+                    return;
+                //Camera is Being Used
                 super.onCameraUnavailable(cameraId);
-//                cameraIsUsed();
 
                 int NOTIFICATION_ID = 234;
                 NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
                 String CHANNEL_ID = "my_channel_01";
 
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     CHANNEL_ID = "my_channel_01";
                     CharSequence name = "my_channel";
                     String Description = "This is my channel";
@@ -82,8 +93,6 @@ public class CheckCameraStatus extends AsyncTask {
                 PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
                 builder.setContentIntent(resultPendingIntent);
                 notificationManager.notify(NOTIFICATION_ID, builder.build());
-
-
 
                 Log.i("Execution Progress","Method Inside");
 //                Toast.makeText(context,"Camera In Use",Toast.LENGTH_LONG).show();

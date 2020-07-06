@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.widget.CompoundButton;
 import android.widget.Switch;
@@ -20,7 +21,7 @@ public class CameraApplication extends AppCompatActivity {
     private DevicePolicyManager devicePolicyManager;
     private Switch cameraSwitch;
     private Switch checkSwitch;
-
+    private CheckCameraStatus checkCameraStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +64,10 @@ public class CameraApplication extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton compoundButton, boolean isEnabled) {
                 try {
                     if (isEnabled) {
-                        new CheckCameraStatus(mContext).doInBackground(null);
+                        checkCameraStatus = new CheckCameraStatus(mContext);
+                        checkCameraStatus.doInBackground(null);
+                    } else {
+                        checkCameraStatus.cancel(true);
                     }
                 } catch (SecurityException securityException) {
                     Log.i("Exception", "Error occurred while checking status - ");
