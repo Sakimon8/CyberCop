@@ -1,9 +1,15 @@
 package com.example.cybercop;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -25,14 +32,12 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 public class MainActivity2 extends AppCompatActivity {
     public static TextView viewresult;
     private RequestQueue mQueue;
     int backpress=0;
     public String loc,sub_loc;
     TextView locality,sub_locality;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,8 +121,11 @@ public class MainActivity2 extends AppCompatActivity {
         startActivity(i);
     }
     public void OpenCamera(View view){
+
         Intent i=new Intent(MainActivity2.this,CameraApplication.class);
         startActivity(i);
+
+
     }
     public void sms_page(View view){
         Intent i=new Intent(MainActivity2.this,Sms.class);

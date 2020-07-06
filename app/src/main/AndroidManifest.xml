@@ -23,10 +23,10 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".CameraApplication"></activity>
-        <activity android:name=".Sms" />
-        <activity android:name=".Safe_Search" />
-        <activity android:name=".Location_crime_rate" />
-        <activity android:name=".MainActivity2" />
+        <activity android:name=".Sms" ></activity>
+        <activity android:name=".Safe_Search" ></activity>
+        <activity android:name=".Location_crime_rate" ></activity>
+        <activity android:name=".MainActivity2" ></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

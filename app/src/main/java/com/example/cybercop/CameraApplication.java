@@ -1,11 +1,13 @@
 package com.example.cybercop;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.CompoundButton;
@@ -17,6 +19,7 @@ public class CameraApplication extends AppCompatActivity {
     private ComponentName adminComponent;
     private DevicePolicyManager devicePolicyManager;
     private Switch cameraSwitch;
+    private Switch checkSwitch;
 
 
     @Override
@@ -51,13 +54,27 @@ public class CameraApplication extends AppCompatActivity {
                 }
             }
         });
+        final Context mContext = this;
+        checkSwitch = (Switch)this.findViewById(R.id.CheckSwitch);
+        checkSwitch.setChecked(false);
+        checkSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isEnabled) {
+                try {
+                    if (isEnabled) {
+                        new CheckCameraStatus(mContext).doInBackground(null);
+                    }
+                } catch (SecurityException securityException) {
+                    Log.i("Exception", "Error occurred while checking status - ");
+                }
+            }
+        });
 
         if (devicePolicyManager.getCameraDisabled(adminComponent)) {
             cameraSwitch.setChecked(false);
         } else {
             cameraSwitch.setChecked(true);
         }
-
     }
-
 }
