@@ -27,6 +27,8 @@ public class Safe_Search extends AppCompatActivity  {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
+                new CheckLink(getApplicationContext(),0).execute(url);
+
                 Toast.makeText(getApplicationContext(),url,Toast.LENGTH_SHORT).show();
 
                 Log.d("WebView", "your current url when webpage loading.." + url);

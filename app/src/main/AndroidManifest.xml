@@ -23,6 +23,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".CameraApplication"></activity>
+
         <activity android:name=".Sms" ></activity>
         <activity android:name=".Safe_Search" ></activity>
         <activity android:name=".Location_crime_rate" ></activity>
