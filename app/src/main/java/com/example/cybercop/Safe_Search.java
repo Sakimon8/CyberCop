@@ -13,6 +13,7 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
@@ -30,11 +31,13 @@ import java.net.URL;
 
 public class Safe_Search extends AppCompatActivity  {
     WebView myWebView ;
+    LinearLayout status;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_safe__search);
         myWebView= (WebView) findViewById(R.id.webview);
+        status=(LinearLayout)findViewById(R.id.status);
         myWebView.setWebViewClient(new WebViewClient()
         {
             @Override
@@ -42,7 +45,7 @@ public class Safe_Search extends AppCompatActivity  {
                 super.onPageStarted(view, url, favicon);
               //  Toast.makeText(getApplicationContext(),"Before checklink"+url,Toast.LENGTH_SHORT).show();
 
-                new CheckLink(getApplicationContext(),0).execute(url);
+                new CheckLink(getApplicationContext(),0,status).execute(url);
 
               //  Toast.makeText(getApplicationContext(),url,Toast.LENGTH_SHORT).show();
 

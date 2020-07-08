@@ -1,6 +1,12 @@
 package com.example.cybercop;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Build;
@@ -18,12 +24,14 @@ public class Sms extends AppCompatActivity {
    public String msg;
    public boolean insertData;
     ArrayList<message> messagelist;
-
+//    SharedPreferences sp = getSharedPreferences("ProtectedApps", Context.MODE_PRIVATE);
     message mess;
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sms);
+        Toast.makeText(this,""+android.os.Build.MANUFACTURER,Toast.LENGTH_LONG).show();
+
         myDB = new DatabaseHelper(this);
 //Commenthello
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.RECEIVE_SMS)!= PackageManager.PERMISSION_GRANTED)

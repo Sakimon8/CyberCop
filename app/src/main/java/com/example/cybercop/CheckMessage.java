@@ -2,6 +2,7 @@ package com.example.cybercop;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
@@ -18,11 +19,13 @@ public class CheckMessage extends AsyncTask {
     private static final int REQUEST_CODE = 000;
     // public DatabaseHelper myDB;
     public String msg,msg_from;
+
     private Context context;
     private int byGetOrPost = 0;
     public CheckMessage(Context context, int flag) {
         this.context = context;
         byGetOrPost = flag;
+
     }
     @Override
     protected Object doInBackground(Object[] args) {
@@ -65,6 +68,7 @@ public class CheckMessage extends AsyncTask {
     @Override
     protected void onPostExecute(Object result){
         Toast.makeText(context,""+String.valueOf(result),Toast.LENGTH_LONG).show();
+
         if(String.valueOf(result).equals("Spam"))
         {
             addtodb(msg,msg_from);
