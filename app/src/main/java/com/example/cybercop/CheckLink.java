@@ -129,8 +129,7 @@ public class CheckLink extends AsyncTask {
             builder.setContentIntent(resultPendingIntent);
             notificationManager.notify(NOTIFICATION_ID, builder.build());
 
-            Log.i("Execution Progress","Method Inside");
-//                Toast.makeText(context,"Camera In Use",Toast.LENGTH_LONG).show();
+
 
     }
 
