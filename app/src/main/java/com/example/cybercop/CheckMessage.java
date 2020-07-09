@@ -14,6 +14,11 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CheckMessage extends AsyncTask {
     private static final int REQUEST_CODE = 000;
@@ -68,11 +73,33 @@ public class CheckMessage extends AsyncTask {
     @Override
     protected void onPostExecute(Object result){
         Toast.makeText(context,""+String.valueOf(result),Toast.LENGTH_LONG).show();
+        String link= extractUrls(msg);
+        String level="";
+        Toast.makeText(context,"The extracted link from message is "+link,Toast.LENGTH_LONG).show();
 
-        if(String.valueOf(result).equals("Spam"))
+            try {
+                level= new CheckLink_forsms(context,0).execute(link).get();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            Toast.makeText(context,"level of maliciousness is "+level,Toast.LENGTH_LONG).show();
+
+
+
+
+
+
+
+
+        if(String.valueOf(result).equals("Spam")&& !level.equals("0"))
         {
-            addtodb(msg,msg_from);
+           // Toast.makeText(context,"level of maliciousness is "+level,Toast.LENGTH_LONG).show();
+
+             addtodb(msg,msg_from);
         }
+
 
 
     }
@@ -86,6 +113,21 @@ public class CheckMessage extends AsyncTask {
         }else{
             Toast.makeText(context, "Something went wrong :(.", Toast.LENGTH_LONG).show();
         }
+    }
+    public static String extractUrls(String text)
+    {
+        String s="";
+        String urlRegex = "((https?|ftp|gopher|telnet|file):((//)|(\\\\))+[\\w\\d:#@%/;$()~_?\\+-=\\\\\\.&]*)";
+        Pattern pattern = Pattern.compile(urlRegex, Pattern.CASE_INSENSITIVE);
+        Matcher urlMatcher = pattern.matcher(text);
+
+        while (urlMatcher.find())
+        {
+            //containedUrls.add(text.substring(urlMatcher.start(0), urlMatcher.end(0)));
+            s=text.substring(urlMatcher.start(0), urlMatcher.end(0));
+        }
+
+        return s;
     }
 
 }
