@@ -74,31 +74,39 @@ public class CheckMessage extends AsyncTask {
     protected void onPostExecute(Object result){
         Toast.makeText(context,""+String.valueOf(result),Toast.LENGTH_LONG).show();
         String link= extractUrls(msg);
-        String level="";
-        Toast.makeText(context,"The extracted link from message is "+link,Toast.LENGTH_LONG).show();
+        String level="0";
+
+        if(!link.equals("")) {
+            Toast.makeText(context, "The extracted link from message is " + link, Toast.LENGTH_LONG).show();
 
             try {
-                level= new CheckLink_forsms(context,0).execute(link).get();
+                level = new CheckLink_forsms(context, 0).execute(link).get();
             } catch (ExecutionException e) {
                 e.printStackTrace();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            Toast.makeText(context,"level of maliciousness is "+level,Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "level of maliciousness is " + level, Toast.LENGTH_LONG).show();
 
 
-
-
-
-
-
+        }
 
         if(String.valueOf(result).equals("Spam")&& !level.equals("0"))
         {
-           // Toast.makeText(context,"level of maliciousness is "+level,Toast.LENGTH_LONG).show();
-
-             addtodb(msg,msg_from);
+            // Toast.makeText(context,"level of maliciousness is "+level,Toast.LENGTH_LONG).show();
+            msg=msg+"\n\n\u001BThis is a spam and  Link is malicious LEVEL="+level;
+            addtodb(msg,msg_from);
         }
+        else if(String.valueOf(result).equals("Spam"))
+        {
+            msg=msg+"\n\n SPAM";
+            addtodb(msg,msg_from);
+        }
+
+
+
+
+
 
 
 
