@@ -40,6 +40,16 @@ public class Location_crime_rate extends AppCompatActivity {
         private int id;
         private String name;
         private String statusDesc;
+
+        public String getPremisDesc() {
+            return premisDesc;
+        }
+
+        public void setPremisDesc(String premisDesc) {
+            this.premisDesc = premisDesc;
+        }
+
+        private String premisDesc;
         public int getId() {
             return id;
         }
@@ -161,11 +171,12 @@ public class Location_crime_rate extends AppCompatActivity {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(c, s.getName(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(c, s.getName()+""+s.getPremisDesc(), Toast.LENGTH_SHORT).show();
                     Dialog_box dialog_hint = new Dialog_box();
                     Bundle bundle = new Bundle();
                     bundle.putString("TEXT", s.getStatusDesc());
                     bundle.putString("HEADING", s.getName());
+                    bundle.putString("TEXT2",s.getPremisDesc());
                     dialog_hint.setArguments(bundle);
                     dialog_hint.show(getSupportFragmentManager(), "Dialog_box");
                 }
@@ -228,10 +239,12 @@ public class Location_crime_rate extends AppCompatActivity {
                                 {
                                     jo=response.getJSONObject(i);
                                     String name=jo.getString("location");
-                                    String propellant=jo.getString("statusDesc");
+                                    String statusDesc=jo.getString("statusDesc");
+                                    String premisDesc=jo.getString("premisDesc");
                                     s=new Location();
                                     s.setName(name);
-                                    s.setStatusDesc(propellant);
+                                    s.setStatusDesc(statusDesc);
+                                    s.setPremisDesc(premisDesc);
                                     downloadedData.add(s);
                                 }
                                 myProgressBar.setVisibility(View.GONE);
