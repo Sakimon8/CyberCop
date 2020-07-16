@@ -28,6 +28,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONArrayRequestListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,7 +42,7 @@ public class MainActivity2 extends AppCompatActivity {
     int backpress=0;
     public String loc,sub_loc;
     TextView locality,sub_locality;
-
+    private static final String JSON_DATA_URL="https://api.npoint.io/5220f324c5e1891eabb2";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,6 +116,70 @@ public class MainActivity2 extends AppCompatActivity {
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         mQueue.add(request);
+    }
+    public void parse(){
+        AndroidNetworking.get(JSON_DATA_URL)
+                .setPriority(Priority.HIGH)
+                .build()
+                .getAsJSONArray(new JSONArrayRequestListener() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        JSONObject jo;
+                        Location_crime_rate.Spacecraft s;
+                        try
+                        {
+                            for(int i=0;i<response.length();i++)
+                            {
+                                jo=response.getJSONObject(i);
+
+                                // int id=jo.getInt("premisCd");
+                                String name=jo.getString("location");
+                                String propellant=jo.getString("statusDesc");
+                                //  String techExists=jo.getString("weaponDesc");
+                                // String imageURL=jo.getString("imageurl");
+                                String area = jo.getString("location");
+                                String status=jo.getString("status");
+                                // String weapon=crimes.getString("weaponUsedCd");
+                                String lat=jo.getString("lat");
+                                String premis =jo.getString("premisDesc");
+                                String lon=jo.getString("lon");
+                                String statusDesc=jo.getString("statusDesc");
+                                if(area.equals(loc))
+                                {
+                                    // Toast.makeText(getApplicationContext(), "This area is crime zone", Toast.LENGTH_SHORT).show();
+                                    viewresult.append("This area is a Crime Zone\n\n");
+                                    //viewresult.append(area+ "\n\n");
+                                    viewresult.append("Status: "+status+"\n\n");
+                                    viewresult.append("Description: "+statusDesc+"\n\n");
+                                    viewresult.append("Crime Description: "+premis+"\n\n");
+                                    viewresult.append("Latitude: "+lat+"\n\n");
+                                    viewresult.append("Longitude :"+lon+"\n\n");
+                                    break;
+                                }
+
+
+
+
+                            }
+
+
+                        }catch (JSONException e)
+                        {
+
+                            Toast.makeText(getApplicationContext(), "GOOD RESPONSE BUT JAVA CAN'T PARSE JSON IT RECEIEVED. "+e.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        anError.printStackTrace();
+
+                        Toast.makeText(getApplicationContext(), "UNSUCCESSFUL :  ERROR IS : "+anError.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+
+
+                });
+
     }
     public void location_page(View view){
         Intent i=new Intent(MainActivity2.this,Location_crime_rate.class);
