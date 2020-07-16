@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+   >
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="AREA"
+        android:padding="7dp"
+        android:textStyle="bold|italic"
+        android:textAlignment="center"
+        android:textColor="@color/one_stat"
+        android:textSize="30dp"
+        android:background="@color/black"
+        android:gravity="center_horizontal" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical"
+        android:fillViewport="true">
+
+
+        <TextView
+            android:padding="20dp"
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="259dp"
+            android:text="No Status Description"
+            android:textColor="@color/one_stat"
+            android:textSize="15dp"
+            android:background="@color/black"
+            />
+
+    </ScrollView>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical"
+        android:fillViewport="true">
+
+
+        <TextView
+            android:padding="20dp"
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="259dp"
+            android:text="No Description Found"
+            android:textColor="@color/one_stat"
+            android:textSize="15dp"
+            android:background="@color/black"
+            />
+
+    </ScrollView>
+
+</LinearLayout>
