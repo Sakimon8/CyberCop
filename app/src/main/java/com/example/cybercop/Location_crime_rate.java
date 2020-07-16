@@ -15,7 +15,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ListView;
@@ -36,21 +35,11 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class Location_crime_rate extends AppCompatActivity {
-    /*
-    Our data object
-     */
-    public class Spacecraft {
-        /*
-        INSTANCE FIELDS
-         */
+
+    public class Location {
         private int id;
         private String name;
-        private String propellant;
-        //   private String imageURL;
-        //   private String technologyExists;
-        /*
-        GETTERS AND SETTERS
-         */
+        private String statusDesc;
         public int getId() {
             return id;
         }
@@ -63,45 +52,27 @@ public class Location_crime_rate extends AppCompatActivity {
         public void setName(String name) {
             this.name = name;
         }
-        public String getPropellant() {
-            return propellant;
+        public String getStatusDesc() {
+            return statusDesc;
         }
-        public void setPropellant(String propellant) {
-            this.propellant = propellant;
+        public void setStatusDesc(String statusDesc) {
+            this.statusDesc = statusDesc;
         }
-        //        public String getImageURL() {
-//            return imageURL;
-//        }
-//        public void setImageURL(String imageURL) {
-//            this.imageURL = imageURL;
-//        }
-//        public String getTechnologyExists() {
-//            return technologyExists;
-//        }
-//        public void setTechnologyExists(String technologyExists) {
-//            this.technologyExists = technologyExists;
-//        }
-        /*
-        TOSTRING
-         */
         @Override
         public String toString() {
             return name;
         }
     }
     class FilterHelper extends Filter {
-        ArrayList<Spacecraft> currentList;
+        ArrayList<Location> currentList;
         ListViewAdapter adapter;
         Context c;
-
-        public FilterHelper(ArrayList<Spacecraft> currentList, ListViewAdapter adapter,Context c) {
+        public FilterHelper(ArrayList<Location> currentList, ListViewAdapter adapter, Context c) {
             this.currentList = currentList;
             this.adapter = adapter;
             this.c=c;
         }
-        /*
-        - Perform actual filtering.
-         */
+
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             FilterResults filterResults=new FilterResults();
@@ -112,20 +83,20 @@ public class Location_crime_rate extends AppCompatActivity {
                 constraint=constraint.toString().toUpperCase();
 
                 //HOLD FILTERS WE FIND
-                ArrayList<Spacecraft> foundFilters=new ArrayList<>();
+                ArrayList<Location> foundFilters=new ArrayList<>();
 
-                Spacecraft spacecraft=null;
+                Location location =null;
 
                 //ITERATE CURRENT LIST
                 for (int i=0;i<currentList.size();i++)
                 {
-                    spacecraft= currentList.get(i);
+                    location = currentList.get(i);
 
                     //SEARCH
-                    if(spacecraft.getName().toUpperCase().contains(constraint) )
+                    if(location.getName().toUpperCase().contains(constraint) )
                     {
                         //ADD IF FOUND
-                        foundFilters.add(spacecraft);
+                        foundFilters.add(location);
                     }
                 }
 
@@ -145,33 +116,30 @@ public class Location_crime_rate extends AppCompatActivity {
 
         @Override
         protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-            adapter.setSpacecrafts((ArrayList<Spacecraft>) filterResults.values);
+            adapter.setLocations((ArrayList<Location>) filterResults.values);
             adapter.refresh();
         }
     }
 
-    /*
-    Our custom adapter class
-     */
     public class ListViewAdapter extends BaseAdapter implements Filterable {
 
         Context c;
-        ArrayList<Spacecraft> spacecrafts;
-        public ArrayList<Spacecraft> currentList;
+        ArrayList<Location> locations;
+        public ArrayList<Location> currentList;
         FilterHelper filterHelper;
 
-        public ListViewAdapter(Context c, ArrayList<Spacecraft> spacecrafts) {
+        public ListViewAdapter(Context c, ArrayList<Location> locations) {
             this.c = c;
-            this.spacecrafts = spacecrafts;
-            this.currentList=spacecrafts;
+            this.locations = locations;
+            this.currentList= locations;
         }
         @Override
         public int getCount() {
-            return spacecrafts.size();
+            return locations.size();
         }
         @Override
         public Object getItem(int i) {
-            return spacecrafts.get(i);
+            return locations.get(i);
         }
         @Override
         public long getItemId(int i) {
@@ -185,37 +153,29 @@ public class Location_crime_rate extends AppCompatActivity {
             }
 
             TextView txtName = view.findViewById(R.id.nameTextView);
-            TextView txtPropellant = view.findViewById(R.id.propellantTextView);
-//            CheckBox chkTechExists = view.findViewById(R.id.myCheckBox);
-            // ImageView spacecraftImageView = view.findViewById(R.id.spacecraftImageView);
-
-            final Spacecraft s= (Spacecraft) this.getItem(i);
+            TextView status_desc = view.findViewById(R.id.TextView);
+            final Location s= (Location) this.getItem(i);
 
             txtName.setText(s.getName());
-            txtPropellant.setText(s.getPropellant());
-            //chkTechExists.setEnabled(true);
-            //   chkTechExists.setText( s.getTechnologyExists());
-            //  chkTechExists.setEnabled(false);
-
-//            if(s.getImageURL() != null && s.getImageURL().length()>0)
-//            {
-//                Picasso.get().load(s.getImageURL()).placeholder(R.drawable.placeholder).into(spacecraftImageView);
-//            }else {
-//                Toast.makeText(c, "Empty Image URL", Toast.LENGTH_LONG).show();
-//                Picasso.get().load(R.drawable.placeholder).into(spacecraftImageView);
-//            }
+            status_desc.setText(s.getStatusDesc());
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Toast.makeText(c, s.getName(), Toast.LENGTH_SHORT).show();
+                    Dialog_box dialog_hint = new Dialog_box();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("TEXT", s.getStatusDesc());
+                    bundle.putString("HEADING", s.getName());
+                    dialog_hint.setArguments(bundle);
+                    dialog_hint.show(getSupportFragmentManager(), "Dialog_box");
                 }
             });
 
             return view;
         }
-        public void setSpacecrafts(ArrayList<Spacecraft> filteredSpacecrafts)
+        public void setLocations(ArrayList<Location> filteredLocations)
         {
-            this.spacecrafts=filteredSpacecrafts;
+            this.locations = filteredLocations;
 
         }
         @Override
@@ -248,9 +208,9 @@ public class Location_crime_rate extends AppCompatActivity {
         /*
         Fetch JSON Data
          */
-        public ArrayList<Spacecraft> retrieve(final ListView mListView, final ProgressBar myProgressBar)
+        public ArrayList<Location> retrieve(final ListView mListView, final ProgressBar myProgressBar)
         {
-            final ArrayList<Spacecraft> downloadedData=new ArrayList<>();
+            final ArrayList<Location> downloadedData=new ArrayList<>();
             myProgressBar.setIndeterminate(true);
             myProgressBar.setVisibility(View.VISIBLE);
 
@@ -261,26 +221,17 @@ public class Location_crime_rate extends AppCompatActivity {
                         @Override
                         public void onResponse(JSONArray response) {
                             JSONObject jo;
-                            Spacecraft s;
+                            Location s;
                             try
                             {
                                 for(int i=0;i<response.length();i++)
                                 {
                                     jo=response.getJSONObject(i);
-
-                                    // int id=jo.getInt("premisCd");
                                     String name=jo.getString("location");
                                     String propellant=jo.getString("statusDesc");
-                                    //  String techExists=jo.getString("weaponDesc");
-                                    // String imageURL=jo.getString("imageurl");
-
-                                    s=new Spacecraft();
-                                    //  s.setId(id);
+                                    s=new Location();
                                     s.setName(name);
-                                    s.setPropellant(propellant);
-                                    //    s.setImageURL(imageURL);
-                                    //    s.setTechnologyExists(techExists);
-
+                                    s.setStatusDesc(propellant);
                                     downloadedData.add(s);
                                 }
                                 myProgressBar.setVisibility(View.GONE);
@@ -302,7 +253,7 @@ public class Location_crime_rate extends AppCompatActivity {
             return downloadedData;
         }
     }
-    ArrayList<Spacecraft> spacecrafts = new ArrayList<>();
+    ArrayList<Location> locations = new ArrayList<>();
     ListView myListView;
     ListViewAdapter adapter;
 
@@ -335,8 +286,8 @@ public class Location_crime_rate extends AppCompatActivity {
                 return false;
             }
         });
-        spacecrafts=new JSONDownloader(Location_crime_rate.this).retrieve(myListView,myProgressBar);
-        adapter=new ListViewAdapter(this,spacecrafts);
+        locations =new JSONDownloader(Location_crime_rate.this).retrieve(myListView,myProgressBar);
+        adapter=new ListViewAdapter(this, locations);
         myListView.setAdapter(adapter);
 
     }
