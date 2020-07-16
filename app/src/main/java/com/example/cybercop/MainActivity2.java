@@ -61,7 +61,7 @@ public class MainActivity2 extends AppCompatActivity {
 
     }
     private void jsonParse() {
-        String url = "http://192.168.1.36/dataset.json";
+        String url = "https://api.npoint.io/0bf79ddbe59c4e6240bc";
        // Toast.makeText(getApplicationContext(), "inside call", Toast.LENGTH_SHORT).show();
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -77,10 +77,11 @@ public class MainActivity2 extends AppCompatActivity {
                                 String status=crimes.getString("status");
                                // String weapon=crimes.getString("weaponUsedCd");
                                 String lat=crimes.getString("lat");
+
                                 String premis =crimes.getString("premisDesc");
                                 String lon=crimes.getString("lon");
                                 String statusDesc=crimes.getString("statusDesc");
-                                if(area.equals(loc))
+                                if(area.equals(sub_loc))
                                 {
                                    // Toast.makeText(getApplicationContext(), "This area is crime zone", Toast.LENGTH_SHORT).show();
                                     viewresult.append("This area is a Crime Zone\n\n");
