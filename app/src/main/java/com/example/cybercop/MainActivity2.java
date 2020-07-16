@@ -59,64 +59,12 @@ public class MainActivity2 extends AppCompatActivity {
         //Button buttonparse = findViewById(R.id.button_parse);
 
         mQueue = Volley.newRequestQueue(this);
-        jsonParse();
+        parse();
 
       //  Toast.makeText(getApplicationContext(), loc, Toast.LENGTH_SHORT).show();
 
     }
-    private void jsonParse() {
-        String url = "https://api.npoint.io/0bf79ddbe59c4e6240bc";
-       // Toast.makeText(getApplicationContext(), "inside call", Toast.LENGTH_SHORT).show();
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                          //  Toast.makeText(getApplicationContext(), "inside parse "+loc, Toast.LENGTH_SHORT).show();
-                            JSONArray jsonarray = response.getJSONArray("data");
 
-                            for (int i = 0; i < jsonarray.length(); i++) {
-                                JSONObject crimes = jsonarray.getJSONObject(i);
-                                String area = crimes.getString("location");
-                                String status=crimes.getString("status");
-                               // String weapon=crimes.getString("weaponUsedCd");
-                                String lat=crimes.getString("lat");
-
-                                String premis =crimes.getString("premisDesc");
-                                String lon=crimes.getString("lon");
-                                String statusDesc=crimes.getString("statusDesc");
-                                if(area.equals(sub_loc))
-                                {
-                                   // Toast.makeText(getApplicationContext(), "This area is crime zone", Toast.LENGTH_SHORT).show();
-                                    viewresult.append("This area is a Crime Zone\n\n");
-                                    //viewresult.append(area+ "\n\n");
-                                    viewresult.append("Status: "+status+"\n\n");
-                                    viewresult.append("Description: "+statusDesc+"\n\n");
-                                    viewresult.append("Crime Description: "+premis+"\n\n");
-                                    viewresult.append("Latitude: "+lat+"\n\n");
-                                    viewresult.append("Longitude :"+lon+"\n\n");
-                                    break;
-                                }
-                            }
-                        } catch (JSONException e) {
-                            Toast.makeText(getApplicationContext(),""+e,Toast.LENGTH_LONG).show();
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-                Log.e("VOLLEY", "ERROR");
-                Toast.makeText(getApplicationContext(),"Error"+error,Toast.LENGTH_LONG).show();
-            }
-        });
-        request.setRetryPolicy(new DefaultRetryPolicy(
-                10000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        mQueue.add(request);
-    }
     public void parse(){
         AndroidNetworking.get(JSON_DATA_URL)
                 .setPriority(Priority.HIGH)
