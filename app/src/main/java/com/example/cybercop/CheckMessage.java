@@ -94,12 +94,17 @@ public class CheckMessage extends AsyncTask {
         if(String.valueOf(result).equals("Spam")&& !level.equals("0"))
         {
             // Toast.makeText(context,"level of maliciousness is "+level,Toast.LENGTH_LONG).show();
-            msg=msg+"\n\n\u001BThis is a spam and  Link is malicious LEVEL="+level;
+            msg=msg+"\n\n\u001B SPAM  and  Link is malicious LEVEL="+level;
             addtodb(msg,msg_from);
         }
         else if(String.valueOf(result).equals("Spam"))
         {
             msg=msg+"\n\n SPAM";
+            addtodb(msg,msg_from);
+        }
+        else if(!level.equals("0"))
+        {
+            msg=msg+"\n\n Link is malicious LEVEL="+level;
             addtodb(msg,msg_from);
         }
 
