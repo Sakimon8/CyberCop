@@ -24,7 +24,7 @@ public class MainActivity2 extends AppCompatActivity {
     int backpress=0;
     public String loc,sub_loc;
     TextView locality,sub_locality;
-    private static final String JSON_DATA_URL="https://api.npoint.io/5220f324c5e1891eabb2";
+    private static final String JSON_DATA_URL="https://api.npoint.io/b931d22114cfe6471a6d";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +68,7 @@ public class MainActivity2 extends AppCompatActivity {
                                 //  String techExists=jo.getString("weaponDesc");
                                 // String imageURL=jo.getString("imageurl");
                                 String area = jo.getString("location");
-                                String status=jo.getString("status");
+                               // String status=jo.getString("status");
                                 // String weapon=crimes.getString("weaponUsedCd");
                                 String lat=jo.getString("lat");
                                 String premis =jo.getString("premisDesc");
@@ -79,7 +79,7 @@ public class MainActivity2 extends AppCompatActivity {
                                     // Toast.makeText(getApplicationContext(), "This area is crime zone", Toast.LENGTH_SHORT).show();
                                     viewresult.append("This area is a Crime Zone\n\n");
                                     //viewresult.append(area+ "\n\n");
-                                    viewresult.append("Status: "+status+"\n\n");
+                                    //viewresult.append("Status: "+status+"\n\n");
                                     viewresult.append("Description: "+statusDesc+"\n\n");
                                     viewresult.append("Crime Description: "+premis+"\n\n");
                                     viewresult.append("Latitude: "+lat+"\n\n");

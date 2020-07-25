@@ -209,7 +209,7 @@ public class Location_crime_rate extends AppCompatActivity {
     public class JSONDownloader {
 
         //SAVE/RETRIEVE URLS
-        private static final String JSON_DATA_URL="https://api.npoint.io/5220f324c5e1891eabb2";
+        private static final String JSON_DATA_URL="https://api.npoint.io/b931d22114cfe6471a6d";
         //INSTANCE FIELDS
         private final Context c;
 
