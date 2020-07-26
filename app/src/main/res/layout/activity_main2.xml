@@ -88,6 +88,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/crime"
+                        android:textStyle="bold"
                         android:textSize="15sp"
                         android:textColor="@color/colorWhite"
                         android:layout_marginLeft="15dp"></TextView>

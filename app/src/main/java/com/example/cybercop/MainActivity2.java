@@ -1,7 +1,9 @@
 package com.example.cybercop;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,7 +26,7 @@ public class MainActivity2 extends AppCompatActivity {
     int backpress=0;
     public String loc,sub_loc;
     TextView locality,sub_locality;
-    private static final String JSON_DATA_URL="https://api.npoint.io/b931d22114cfe6471a6d";
+    private static final String JSON_DATA_URL="https://api.npoint.io/d17a7ef257bacbc597a5";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,29 +63,22 @@ public class MainActivity2 extends AppCompatActivity {
                             for(int i=0;i<response.length();i++)
                             {
                                 jo=response.getJSONObject(i);
-
-                                // int id=jo.getInt("premisCd");
-                                String name=jo.getString("location");
-                                String propellant=jo.getString("statusDesc");
-                                //  String techExists=jo.getString("weaponDesc");
-                                // String imageURL=jo.getString("imageurl");
                                 String area = jo.getString("location");
-                               // String status=jo.getString("status");
-                                // String weapon=crimes.getString("weaponUsedCd");
-                                String lat=jo.getString("lat");
                                 String premis =jo.getString("premisDesc");
-                                String lon=jo.getString("lon");
                                 String statusDesc=jo.getString("statusDesc");
+                                String crime = jo.getString("crimeDesc");
+                                String weapon =jo.getString("weaponDesc");
+                                String gender=jo.getString("victSex");
+
                                 if(area.equals(loc))
                                 {
-                                    // Toast.makeText(getApplicationContext(), "This area is crime zone", Toast.LENGTH_SHORT).show();
-                                    viewresult.append("This area is a Crime Zone\n\n");
-                                    //viewresult.append(area+ "\n\n");
-                                    //viewresult.append("Status: "+status+"\n\n");
-                                    viewresult.append("Description: "+statusDesc+"\n\n");
-                                    viewresult.append("Crime Description: "+premis+"\n\n");
-                                    viewresult.append("Latitude: "+lat+"\n\n");
-                                    viewresult.append("Longitude :"+lon+"\n\n");
+                                    viewresult.append("\n");
+                                    viewresult.append(Html.fromHtml("<b>" + "Status Descp: " + "</b>")+statusDesc+"\n\n");
+                                    viewresult.append("Premise Description: "+premis+"\n\n");
+                                    viewresult.append("Crime Description: "+crime+"\n\n");
+                                    viewresult.append("Weapon Description: "+weapon+"\n\n");
+                                    viewresult.append("Victim Gender: "+gender+"\n\n");
+                                    viewresult.setTypeface(Typeface.DEFAULT_BOLD);
                                     break;
                                 }
 

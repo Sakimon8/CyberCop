@@ -40,6 +40,46 @@ public class Location_crime_rate extends AppCompatActivity {
         private int id;
         private String name;
         private String statusDesc;
+        private String premisDesc;
+        private String weaponDesc;
+        private String crimeDesc;
+        private String victSex;
+        private String area;
+        public String getArea() {
+            return area;
+        }
+
+        public void setArea(String area) {
+            this.area = area;
+        }
+
+
+
+        public String getWeaponDesc() {
+            return weaponDesc;
+        }
+
+        public void setWeaponDesc(String weaponDesc) {
+            this.weaponDesc = weaponDesc;
+        }
+
+        public String getCrimeDesc() {
+            return crimeDesc;
+        }
+
+        public void setCrimeDesc(String crimeDesc) {
+            this.crimeDesc = crimeDesc;
+        }
+
+        public String getVictSex() {
+            return victSex;
+        }
+
+        public void setVictSex(String victSex) {
+            this.victSex = victSex;
+        }
+
+
 
         public String getPremisDesc() {
             return premisDesc;
@@ -49,7 +89,7 @@ public class Location_crime_rate extends AppCompatActivity {
             this.premisDesc = premisDesc;
         }
 
-        private String premisDesc;
+
         public int getId() {
             return id;
         }
@@ -165,18 +205,21 @@ public class Location_crime_rate extends AppCompatActivity {
             TextView txtName = view.findViewById(R.id.nameTextView);
             TextView status_desc = view.findViewById(R.id.TextView);
             final Location s= (Location) this.getItem(i);
-
-            txtName.setText(s.getName());
-            status_desc.setText(s.getStatusDesc());
+            txtName.setText(s.getArea());
+            status_desc.setText(s.getName());
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(c, s.getName()+""+s.getPremisDesc(), Toast.LENGTH_SHORT).show();
+
                     Dialog_box dialog_hint = new Dialog_box();
                     Bundle bundle = new Bundle();
                     bundle.putString("TEXT", s.getStatusDesc());
                     bundle.putString("HEADING", s.getName());
                     bundle.putString("TEXT2",s.getPremisDesc());
+                    bundle.putString("weapon", s.getWeaponDesc());
+                    bundle.putString("crime",s.getCrimeDesc());
+                    bundle.putString("area",s.getArea());
+                    bundle.putString("gender",s.getVictSex());
                     dialog_hint.setArguments(bundle);
                     dialog_hint.show(getSupportFragmentManager(), "Dialog_box");
                 }
@@ -209,7 +252,7 @@ public class Location_crime_rate extends AppCompatActivity {
     public class JSONDownloader {
 
         //SAVE/RETRIEVE URLS
-        private static final String JSON_DATA_URL="https://api.npoint.io/b931d22114cfe6471a6d";
+        private static final String JSON_DATA_URL="https://api.npoint.io/d17a7ef257bacbc597a5";
         //INSTANCE FIELDS
         private final Context c;
 
@@ -241,10 +284,18 @@ public class Location_crime_rate extends AppCompatActivity {
                                     String name=jo.getString("location");
                                     String statusDesc=jo.getString("statusDesc");
                                     String premisDesc=jo.getString("premisDesc");
+                                    String crimeDesc=jo.getString("crimeDesc");
+                                    String weaponDesc=jo.getString("weaponDesc");
+                                    String victSex=jo.getString("victSex");
+                                    String area=jo.getString("areaName");
                                     s=new Location();
                                     s.setName(name);
                                     s.setStatusDesc(statusDesc);
                                     s.setPremisDesc(premisDesc);
+                                    s.setArea(area);
+                                    s.setCrimeDesc(crimeDesc);
+                                    s.setWeaponDesc(weaponDesc);
+                                    s.setVictSex(victSex);
                                     downloadedData.add(s);
                                 }
                                 myProgressBar.setVisibility(View.GONE);
