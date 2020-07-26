@@ -26,7 +26,7 @@ public class MainActivity2 extends AppCompatActivity {
     int backpress=0;
     public String loc,sub_loc;
     TextView locality,sub_locality;
-    private static final String JSON_DATA_URL="https://api.npoint.io/d17a7ef257bacbc597a5";
+    private static final String JSON_DATA_URL="https://api.npoint.io/ab1abcbd612aaefde7b5";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +50,7 @@ public class MainActivity2 extends AppCompatActivity {
     }
 
     public void parse(){
+
         AndroidNetworking.get(JSON_DATA_URL)
                 .setPriority(Priority.HIGH)
                 .build()
@@ -60,31 +61,48 @@ public class MainActivity2 extends AppCompatActivity {
                         Location_crime_rate.Location s;
                         try
                         {
+                            int crimes = 0;
                             for(int i=0;i<response.length();i++)
                             {
+
                                 jo=response.getJSONObject(i);
                                 String area = jo.getString("location");
+                                String areaName=jo.getString("areaName");
                                 String premis =jo.getString("premisDesc");
                                 String statusDesc=jo.getString("statusDesc");
                                 String crime = jo.getString("crimeDesc");
                                 String weapon =jo.getString("weaponDesc");
                                 String gender=jo.getString("victSex");
 
-                                if(area.equals(loc))
+                                if(areaName.equals(sub_loc))
                                 {
+
+                                    crimes++;
+                                    if(crimes>1)
+                                    {
+                                        viewresult.append("-----------------------------------------------\n\n");
+                                    }
                                     viewresult.append("\n");
+                                    viewresult.append("Crime :"+crimes+"\n\n");
                                     viewresult.append(Html.fromHtml("<b>" + "Status Descp: " + "</b>")+statusDesc+"\n\n");
                                     viewresult.append("Premise Description: "+premis+"\n\n");
                                     viewresult.append("Crime Description: "+crime+"\n\n");
                                     viewresult.append("Weapon Description: "+weapon+"\n\n");
                                     viewresult.append("Victim Gender: "+gender+"\n\n");
+
                                     viewresult.setTypeface(Typeface.DEFAULT_BOLD);
-                                    break;
+
                                 }
 
 
 
 
+
+
+                            }
+                            if(crimes==0)
+                            {
+                                viewresult.append("!!!NO CRIME ZONE !!!\n");
                             }
 
 
