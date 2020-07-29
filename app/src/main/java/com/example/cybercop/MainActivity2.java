@@ -132,6 +132,7 @@ public class MainActivity2 extends AppCompatActivity {
         Intent i=new Intent(MainActivity2.this,Safe_Search.class);
         startActivity(i);
     }
+
     public void OpenCamera(View view){
 
         Intent i=new Intent(MainActivity2.this,CameraApplication.class);
@@ -139,6 +140,12 @@ public class MainActivity2 extends AppCompatActivity {
 
 
     }
+    public void profile_catcher(View view)
+    {
+        Intent i=new Intent(MainActivity2.this,ProfileCatcher.class);
+        startActivity(i);
+    }
+
     public void sms_page(View view){
         Intent i=new Intent(MainActivity2.this,Sms.class);
         startActivity(i);

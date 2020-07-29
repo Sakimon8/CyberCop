@@ -10,14 +10,10 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.os.Handler;
-import android.util.Log;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -45,17 +41,7 @@ public class CheckLink extends AsyncTask {
     protected Object doInBackground(Object[] args) {
         try{
              msg = String.valueOf(args[0]);
-//            URL aURL = new URL(msg);
-//
-//            System.out.println("protocol = " + aURL.getProtocol());
-//            System.out.println("authority = " + aURL.getAuthority());
-//            System.out.println("host = " + aURL.getHost());
-//            System.out.println("port = " + aURL.getPort());
-//            System.out.println("path = " + aURL.getPath());
-//            System.out.println("query = " + aURL.getQuery());
-//            System.out.println("filename = " + aURL.getFile());
-//            System.out.println("ref = " + aURL.getRef());
-            string= msg.replace("https://","").replace("https:// www.","").replace("www.","").replace("http://","").replace("http:// www.","");
+         string= msg.replace("https://","").replace("https:// www.","").replace("www.","").replace("http://","").replace("http:// www.","");
 
             String link = "https://link-detection.herokuapp.com/?bla="+string;
          //  String link="https://link-detection.herokuapp.com/?bla=purplehorses.net/?page=bleach-244-online";
