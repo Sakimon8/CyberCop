@@ -30,8 +30,6 @@ public class Sms extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sms);
-        Toast.makeText(this,""+android.os.Build.MANUFACTURER,Toast.LENGTH_LONG).show();
-
         myDB = new DatabaseHelper(this);
 //Commenthello
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.RECEIVE_SMS)!= PackageManager.PERMISSION_GRANTED)
