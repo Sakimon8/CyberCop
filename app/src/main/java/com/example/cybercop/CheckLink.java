@@ -16,13 +16,17 @@ import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 
 public class CheckLink extends AsyncTask {
@@ -39,12 +43,12 @@ public class CheckLink extends AsyncTask {
     }
     @Override
     protected Object doInBackground(Object[] args) {
-        try{
-             msg = String.valueOf(args[0]);
-         string= msg.replace("https://","").replace("https:// www.","").replace("www.","").replace("http://","").replace("http:// www.","");
+        try {
+            msg = String.valueOf(args[0]);
+            string = msg.replace("https://", "").replace("https:// www.", "").replace("www.", "").replace("http://", "").replace("http:// www.", "");
 
-            String link = "https://link-detection.herokuapp.com/?bla="+string;
-         //  String link="https://link-detection.herokuapp.com/?bla=purplehorses.net/?page=bleach-244-online";
+            String link = "https://link-detection.herokuapp.com/?bla=" + string;
+            //  String link="https://link-detection.herokuapp.com/?bla=purplehorses.net/?page=bleach-244-online";
             URL url = new URL(link);
             HttpClient client = new DefaultHttpClient();
             HttpGet request = new HttpGet();
@@ -53,23 +57,34 @@ public class CheckLink extends AsyncTask {
             BufferedReader in = new BufferedReader(new
                     InputStreamReader(response.getEntity().getContent()));
             StringBuffer sb = new StringBuffer("");
-            String line="";
+            String line = "";
             while ((line = in.readLine()) != null) {
                 sb.append(line);
                 break;
             }
             in.close();
             Object obj;
-            if(sb!=null) {
-                 obj = sb.toString();
+            if (sb != null) {
+                obj = sb.toString();
                 return obj;
-            }
-            else {
+            } else {
                 return null;
             }
 
-        } catch(Exception e){
-            Object obj=new String("Exception: " + e.getMessage());
+        } catch (IllegalStateException e) {
+            Object obj = new String("Exception: " + e.getMessage());
+            return obj;
+        } catch (MalformedURLException e) {
+            Object obj = new String("Exception: " + e.getMessage());
+            return obj;
+        } catch (ClientProtocolException e) {
+            Object obj = new String("Exception: " + e.getMessage());
+            return obj;
+        } catch (IOException e) {
+            Object obj = new String("Exception: " + e.getMessage());
+            return obj;
+        } catch (URISyntaxException e) {
+            Object obj = new String("Exception: " + e.getMessage());
             return obj;
         }
 

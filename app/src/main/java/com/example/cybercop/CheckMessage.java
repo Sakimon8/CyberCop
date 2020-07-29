@@ -2,6 +2,7 @@ package com.example.cybercop;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -12,8 +13,11 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.URI;
 import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -37,37 +41,41 @@ public class CheckMessage extends AsyncTask {
         try{
              msg = String.valueOf(args[0]);
              msg_from=String.valueOf(args[1]);
-           // Toast.makeText(context,""+msg_from,Toast.LENGTH_LONG).show();
 
-            String replacemsg=msg.replace(" ","%20");
-            String link = "https://nlp-application.herokuapp.com/?bla="+replacemsg;
+            //post method
+
+            String link = "https://message-check.herokuapp.com/";
+            String data  = URLEncoder.encode("message", "UTF-8") + "=" +
+                    URLEncoder.encode(msg, "UTF-8");
+
+            Log.i("Data",data);
             URL url = new URL(link);
-            HttpClient client = new DefaultHttpClient();
-            HttpGet request = new HttpGet();
-            request.setURI(new URI(link));
-            HttpResponse response = client.execute(request);
-            BufferedReader in = new BufferedReader(new
-                    InputStreamReader(response.getEntity().getContent()));
-            StringBuffer sb = new StringBuffer("");
-            String line="";
-            while ((line = in.readLine()) != null) {
+            URLConnection conn = url.openConnection();
+
+            conn.setDoOutput(true);
+            OutputStreamWriter wr = new OutputStreamWriter(((URLConnection) conn).getOutputStream());
+
+            wr.write( data );
+            wr.flush();
+
+            BufferedReader reader = new BufferedReader(new
+                    InputStreamReader(conn.getInputStream()));
+
+            StringBuilder sb = new StringBuilder();
+            String line = null;
+
+            // Read Server Response
+            while((line = reader.readLine()) != null) {
                 sb.append(line);
                 break;
             }
-            in.close();
-            Object obj;
-            if(sb!=null) {
-                 obj = sb.toString();
-                return obj;
-            }
-            else {
-                return null;
-            }
-
+            Log.i("result",sb.toString());
+            return sb.toString();
         } catch(Exception e){
-            Object obj=new String("Exception: " + e.getMessage());
-            return obj;
+            return new String("Exception: " + e.getMessage());
         }
+
+
 
     }
     @Override
