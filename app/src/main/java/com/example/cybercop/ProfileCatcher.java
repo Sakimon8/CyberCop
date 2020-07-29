@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
@@ -23,6 +24,7 @@ public class ProfileCatcher extends AppCompatActivity {
     Uri imageUri;
     String encoded;
     ImageView imageView;
+    TextView result;
     Button button1,button2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +39,12 @@ public class ProfileCatcher extends AppCompatActivity {
             }
         });
         button2 = (Button)findViewById(R.id.buttonUploadPicture);
+        result=(TextView)findViewById(R.id.result);
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new CheckImage(getApplicationContext(),0).execute(encoded);
+                result.setText("Loading");
+                new CheckImage(getApplicationContext(),0,result).execute(encoded);
             }
         });
     }
