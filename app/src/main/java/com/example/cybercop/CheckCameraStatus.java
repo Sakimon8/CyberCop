@@ -82,7 +82,7 @@ public class CheckCameraStatus extends AsyncTask {
                 }
 
                 NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
-                        .setSmallIcon(R.mipmap.ic_launcher)
+                        .setSmallIcon(R.drawable.cybercop)
                         .setContentTitle("Caution")
                         .setContentText("Camera Being Used, Ignore this notification if you're using it.");
 

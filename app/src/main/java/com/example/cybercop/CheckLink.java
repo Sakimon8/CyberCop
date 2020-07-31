@@ -116,7 +116,7 @@ public class CheckLink extends AsyncTask {
             }
 
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
-                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setSmallIcon(R.drawable.cybercop)
                     .setContentTitle("Caution")
                     .setContentText(a+" websites have blacklisted the current website")
                     .setDefaults(Notification.DEFAULT_ALL)
@@ -129,8 +129,6 @@ public class CheckLink extends AsyncTask {
             PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
             builder.setContentIntent(resultPendingIntent);
             notificationManager.notify(NOTIFICATION_ID, builder.build());
-
-
 
     }
 
