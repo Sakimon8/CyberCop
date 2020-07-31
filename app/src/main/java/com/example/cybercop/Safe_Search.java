@@ -38,6 +38,9 @@ public class Safe_Search extends AppCompatActivity  {
         setContentView(R.layout.activity_safe__search);
         myWebView= (WebView) findViewById(R.id.webview);
         status=(LinearLayout)findViewById(R.id.status);
+        WebSettings webSettings = myWebView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+
         myWebView.setWebViewClient(new WebViewClient()
         {
             @Override
