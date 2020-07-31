@@ -42,8 +42,8 @@ public class MainActivity extends AppCompatActivity  {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String []loc=gpstracker.data();
-                Intent i=new Intent(MainActivity.this,MainActivity2.class);
+                String []loc= gpstracker.data();
+                Intent i=new Intent(MainActivity.this, MainActivity2.class);
 
                 Toast.makeText(MainActivity.this,"Area is "+loc[1],Toast.LENGTH_LONG).show();
 
@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity  {
 
         @Override
         public void run() {
-            MainActivity.this.runOnUiThread(  new Runnable() {
+            MainActivity.this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     if(mSlideViewPager.getCurrentItem()==0){
